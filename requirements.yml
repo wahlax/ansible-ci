@@ -1,0 +1,13 @@
+---
+
+- src: https://github.com/wahlax/ansible-jenkins-role
+  version: main
+  name: wahlax.jenkins
+
+- src: https://github.com/wahlax/ansible-docker-role
+  version: main
+  name: wahlax.docker
+
+- src: https://github.com/wahlax/ansible-git-role
+  version: main
+  name: wahlax.git

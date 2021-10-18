@@ -1,0 +1,12 @@
+- hosts: all
+  become: yes
+
+  roles:
+    - wahlax.jenkins
+    - role: wahlax.docker
+      docker_users:
+        - jenkins
+    - role: wahlax.git
+      git_user: jenkins
+      git_user_name: Wes Williams
+      git_user_email: wes@wahlax.com
