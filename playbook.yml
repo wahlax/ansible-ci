@@ -2,11 +2,37 @@
   become: yes
 
   roles:
+
     - wahlax.jenkins
+
     - role: wahlax.docker
       docker_users:
         - jenkins
+
     - role: wahlax.git
       git_user: jenkins
       git_user_name: Wes Williams
       git_user_email: wes@wahlax.com
+
+    - role: wahlax.ansible
+      ansible_pip_user: jenkins
+
+    - role: wahlax.terraform
+
+  tasks:
+
+    - name: Install awscli with pip
+      ansible.builtin.pip:
+        name: awscli
+        executable: pip3
+      become: yes
+      become_user: jenkins
+     
+    - name: Install azure-cli with pip
+      ansible.builtin.pip:
+        name: azure-cli
+        extra_args: --extra-index-url https://azcliprod.blob.core.windows.net/beta/simple/
+        executable: pip3
+      become: yes
+      become_user: jenkins
+     

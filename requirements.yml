@@ -11,3 +11,11 @@
 - src: https://github.com/wahlax/ansible-git-role
   version: main
   name: wahlax.git
+
+- src: https://github.com/wahlax/ansible-ansible-role
+  version: main
+  name: wahlax.ansible
+
+- src: https://github.com/wahlax/ansible-terraform-role
+  version: main
+  name: wahlax.terraform

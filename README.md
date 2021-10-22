@@ -6,7 +6,10 @@ Provision CI server with Ansible including
  * jdk
  * docker
  * git
-
+ * ansible
+ * terraform
+ * aws cli
+ * azure cli
 
 ## Testing
 
