@@ -37,3 +37,10 @@
       become: yes
       become_user: jenkins
      
+    - name: Create public key for jenkins
+      ansible.builtin.command: ssh-keygen -t rsa -C "" -N "" -f ~/.ssh/id_rsa
+      args:
+        creates: /home/jenkins/.ssh/id_rsa.pub
+      become: yes
+      become_user: jenkins
+      

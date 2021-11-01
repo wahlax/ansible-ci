@@ -72,6 +72,7 @@ Vagrant.configure("2") do |config|
   # Provisioning configuration for Ansible.
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "playbook.yml"
-#    ansible.extra_vars = '@variables.yml'
+    ansible.extra_vars = "@vault/secrets.yml"
+    ansible.vault_password_file = "vault/password-file"
   end
 end
