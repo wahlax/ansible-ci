@@ -11,6 +11,19 @@ Provision CI server with Ansible including
  * aws cli
  * azure cli
 
+## Required Parameters (provide via vault)
+
+ * `jenkins_admin_username` - admin username
+ * `jenkins_admin_password` - admin password
+ * `jenkins_global_secrets` - list of items as show below
+
+```
+jenkins_global_secrets:
+  - name: test1-secret
+    description: this is test 1
+    text: test1-secret-value
+```
+
 ## Testing
 
 ### Install roles from git
