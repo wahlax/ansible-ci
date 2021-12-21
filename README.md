@@ -13,6 +13,7 @@ Provision CI server with Ansible including
 
 ## Required Parameters (provide via vault)
 
+ * `jks_password` - keystore password for jenkins
  * `jenkins_admin_username` - admin username
  * `jenkins_admin_password` - admin password
  * `jenkins_global_secrets` - list of items as show below
@@ -23,6 +24,16 @@ jenkins_global_secrets:
     description: this is test 1
     text: test1-secret-value
 ```
+
+## Expected Parameters (via variables file)
+
+ * `ci_user` - user for ci (jenkins)
+ * `jks_location` - location of the java keystore
+ * `jks_subject` - subject details for certificate
+ * `jks_alias: - alias for keystore
+ * `git_user_name` - username for git config
+ * `git_user_email` - email for git conig
+ * `terraform_version` - version of terraform
 
 ## Testing
 

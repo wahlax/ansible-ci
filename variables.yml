@@ -1,0 +1,12 @@
+---
+
+ci_user: jenkins
+
+jks_location: /home/jenkins/selfsigned.jks
+jks_subject: "CN=localhost, OU=orgUnit, O=org, L=city, S=state, C=countryCode" 
+jks_alias: jenkins
+
+git_user_name: Wes Williams
+git_user_email: wes@wahlax.com
+
+terraform_version: 0.14.9-1

@@ -1,24 +1,53 @@
 - hosts: all
   become: yes
 
+  pre_tasks:
+    - name: Configure ssh
+      ansible.builtin.include_role:
+        name: wahlax.sshconfig
+
+    - name: Force sshd restart handler if required
+      meta: flush_handlers
+
+    - name: Create {{ci_user}} user 
+      ansible.builtin.user:
+        name: "{{ci_user}}"
+        state: present
+
+    - name: Create self signed cert for {{ci_user}}
+      ansible.builtin.include_role:
+        name: wahlax.jks
+      vars:
+        jks_location: "{{jks_location}}"
+        jks_owner: "{{ci_user}}"
+        jks_password: "{{jks_password}}"
+        jks_subject: "{{jks_subject}}"
+        jks_alias: "{{jks_alias}}"
+  
   roles:
 
-    - wahlax.jenkins
+    - role: wahlax.jenkins
+      jenkins_admin_username: "{{jenkins_admin_username}}"
+      jenkins_admin_password: "{{jenkins_admin_password}}"
+      jenkins_global_secrets: "{{jenkins_global_secrets}}"
+      jenkins_local_url: https://localhost:8443
+      jenkins_extra_params: "-httpPort=-1 --httpsPort=8443 --httpsKeyStore=/home/{{ci_user}}/selfsigned.jks --httpsKeyStorePassword={{jks_password}}"
+      jenkins_selfsigned_cert: yes
 
     - role: wahlax.docker
       docker_users:
-        - jenkins
+        - "{{ci_user}}"
 
     - role: wahlax.git
-      git_user: jenkins
-      git_user_name: Wes Williams
-      git_user_email: wes@wahlax.com
+      git_user: "{{ci_user}}"
+      git_user_name: "{{git_user_name}}"
+      git_user_email: "{{git_user_email}}"
 
     - role: wahlax.ansible
-      ansible_pip_user: jenkins
+      ansible_pip_user: "{{ci_user}}"
 
     - role: wahlax.terraform
-      terraform_version: 0.14.9-1
+      terraform_version: "{{terraform_version}}"
 
   tasks:
 
@@ -27,7 +56,7 @@
         name: awscli
         executable: pip3
       become: yes
-      become_user: jenkins
+      become_user: "{{ci_user}}"
      
     - name: Install azure-cli with pip
       ansible.builtin.pip:
@@ -35,12 +64,12 @@
         extra_args: --extra-index-url https://azcliprod.blob.core.windows.net/beta/simple/
         executable: pip3
       become: yes
-      become_user: jenkins
+      become_user: "{{ci_user}}"
      
-    - name: Create public key for jenkins
+    - name: Create public key for {{ci_user}}
       ansible.builtin.command: ssh-keygen -t rsa -C "" -N "" -f ~/.ssh/id_rsa
       args:
-        creates: /home/jenkins/.ssh/id_rsa.pub
+        creates: /home/{{ci_user}}/.ssh/id_rsa.pub
       become: yes
-      become_user: jenkins
+      become_user: "{{ci_user}}"
       

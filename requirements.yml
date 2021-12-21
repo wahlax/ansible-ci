@@ -1,5 +1,13 @@
 ---
 
+- src: https://github.com/wahlax/ansible-sshconfig-role
+  version: main
+  name: wahlax.sshconfig
+
+- src: https://github.com/wahlax/ansible-jks-role
+  version: main
+  name: wahlax.jks
+
 - src: https://github.com/wahlax/ansible-jenkins-role
   version: main
   name: wahlax.jenkins
