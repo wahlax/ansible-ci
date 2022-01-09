@@ -1,8 +1,8 @@
 ---
 
-- src: https://github.com/wahlax/ansible-sshconfig-role
+- src: https://github.com/wahlax/ansible-init_base-role
   version: main
-  name: wahlax.sshconfig
+  name: wahlax.init_base
 
 - src: https://github.com/wahlax/ansible-jks-role
   version: main

@@ -2,12 +2,9 @@
   become: yes
 
   pre_tasks:
-    - name: Configure ssh
+    - name: Init Base VM
       ansible.builtin.include_role:
-        name: wahlax.sshconfig
-
-    - name: Force sshd restart handler if required
-      meta: flush_handlers
+        name: wahlax.init_base
 
     - name: Create {{ci_user}} user 
       ansible.builtin.user:

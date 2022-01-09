@@ -2,6 +2,7 @@
 
 Provision CI server with Ansible including
 
+ * jks
  * jenkins
  * jdk
  * docker
@@ -30,22 +31,18 @@ jenkins_global_secrets:
  * `ci_user` - user for ci (jenkins)
  * `jks_location` - location of the java keystore
  * `jks_subject` - subject details for certificate
- * `jks_alias: - alias for keystore
+ * `jks_alias`: - alias for keystore
  * `git_user_name` - username for git config
  * `git_user_email` - email for git conig
  * `terraform_version` - version of terraform
 
 ## Testing
 
-### Install roles from git
-```
-ansible-galaxy install -r requirements.yml
-```
-
 Credit: Tested with vagrant image from [@geerlingguy's Ansible for Devops](https://github.com/geerlingguy/ansible-for-devops)
 
 ### Initial Install
 ```
+ansible-galaxy install -r requirements.yml
 vagrant up
 ```
 
